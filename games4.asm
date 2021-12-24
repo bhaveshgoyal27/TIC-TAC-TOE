@@ -535,9 +535,9 @@ MAIN PROC
             
            
        CHECK3:  ; CHECKING 7, 8, 9
-            MOV AL, C4
-            MOV BL, C5 
-            MOV CL, C6
+            MOV AL, C7
+            MOV BL, C8 
+            MOV CL, C9
             
             CMP AL, BL
             JNZ CHECK4
@@ -1109,10 +1109,206 @@ MAIN PROC
             MOV C9_1, 1
             JMP CHECK   
 
+    ; GENERATING COMPUTER MOVE
+
     INPUTA:
         INC MOVES; 
-        MOV CL,CUR
+        MOV CL,CUR;
 
+        CMP MOVES,2; IF ITS COMPUTERS 1ST MOVE THEN RANDOM
+        JZ C1_1U;
+
+        CMP MOVES,4; IF ITS COMPUTERS 2ND MOVE THEN NEW ALGO
+        JZ MOVE_1;
+
+        CMP MOVES,6; IF ITS COMPUTERS 3RD MOVE THEN NEW ALGO
+        JZ MOVE_1;
+
+        MOVE_1: ; 
+
+            CHECK_5: ; CHECKING IF COMPUTER SHOULD DO MOVE 5
+                CMP C5_1,1;
+                JZ CHECK_1;
+
+                MOV AL,C2;
+                MOV BL,C8;
+
+                CMP AL,BL; CHECKING C2 AND C8
+                JZ C5_1U;
+
+                MOV AL,C4;
+                MOV BL,C6;
+
+                CMP AL,BL; CHECKING C4 AND C6
+                JZ C5_1U;
+
+                MOV AL,C1;
+                MOV BL,C9;
+
+                CMP AL,BL; CHECKING C1 AND C9
+                JZ C5_1U;
+
+                MOV AL,C3;
+                MOV BL,C7;
+
+                CMP AL,BL; CHECKING C3 AND C7
+                JZ C5_1U;
+
+
+            CHECK_1: ; CHECKING IF COMPUTER SHOULD DO MOVE 1
+                CMP C1_1,1;
+                JZ CHECK_3;
+
+                MOV AL,C2;
+                MOV BL,C3;
+
+                CMP AL,BL; CHECKING C2 AND C3
+                JZ C1_1U;
+
+                MOV AL,C4;
+                MOV BL,C7;
+
+                CMP AL,BL; CHECKING C4 AND C7
+                JZ C1_1U;
+
+                MOV AL,C5;
+                MOV BL,C9;
+
+                CMP AL,BL; CHECKING C5 AND C9
+                JZ C1_1U;
+
+
+            CHECK_3: ; CHECKING IF COMPUTER SHOULD DO MOVE 3
+                CMP C3_1,1;
+                JZ CHECK_7;
+
+                MOV AL,C2;
+                MOV BL,C1;
+
+                CMP AL,BL; CHECKING C2 AND C1
+                JZ C3_1U;
+
+                MOV AL,C5;
+                MOV BL,C7;
+
+                CMP AL,BL; CHECKING C5 AND C7
+                JZ C3_1U;
+
+                MOV AL,C6;
+                MOV BL,C9;
+
+                CMP AL,BL; CHECKING C6 AND C9
+                JZ C3_1U;
+
+
+            CHECK_7: ; CHECKING IF COMPUTER SHOULD DO MOVE 7
+                CMP C7_1,1;
+                JZ CHECK_9;
+
+                MOV AL,C5;
+                MOV BL,C3;
+
+                CMP AL,BL; CHECKING C5 AND C3
+                JZ C7_1U;
+
+                MOV AL,C4;
+                MOV BL,C1;
+
+                CMP AL,BL; CHECKING C4 AND C1
+                JZ C7_1U;
+
+                MOV AL,C9;
+                MOV BL,C8;
+
+                CMP AL,BL; CHECKING C8 AND C9
+                JZ C7_1U;
+
+
+            CHECK_9: ; CHECKING IF COMPUTER SHOULD DO MOVE 9
+                CMP C9_1,1;
+                JZ CHECK_2;
+
+                MOV AL,C6;
+                MOV BL,C3;
+
+                CMP AL,BL; CHECKING C6 AND C3
+                JZ C9_1U;
+
+                MOV AL,C7;
+                MOV BL,C8;
+
+                CMP AL,BL; CHECKING C8 AND C7
+                JZ C9_1U;
+
+                MOV AL,C1;
+                MOV BL,C5;
+
+                CMP AL,BL; CHECKING C5 AND C1
+                JZ C9_1U;
+
+            CHECK_2: ; CHECKING IF COMPUTER SHOULD DO MOVE 2
+                CMP C2_1,1;
+                JZ CHECK_4;
+
+                MOV AL,C1;
+                MOV BL,C3;
+
+                CMP AL,BL; CHECKING C1 AND C3
+                JZ C2_1U;
+
+                MOV AL,C5;
+                MOV BL,C8;
+
+                CMP AL,BL; CHECKING C5 AND C8
+                JZ C2_1U;
+
+            CHECK_4: ; CHECKING IF COMPUTER SHOULD DO MOVE 4
+                CMP C4_1,1;
+                JZ CHECK_6;
+
+                MOV AL,C1;
+                MOV BL,C7;
+
+                CMP AL,BL; CHECKING C1 AND C7
+                JZ C4_1U;
+
+                MOV AL,C5;
+                MOV BL,C6;
+
+                CMP AL,BL; CHECKING C5 AND C6
+                JZ C4_1U;
+
+            CHECK_6: ; CHECKING IF COMPUTER SHOULD DO MOVE 6
+                CMP C6_1,1;
+                JZ CHECK_8;
+
+                MOV AL,C3;
+                MOV BL,C9;
+
+                CMP AL,BL; CHECKING C9 AND C3
+                JZ C6_1U;
+
+                MOV AL,C5;
+                MOV BL,C4;
+
+                CMP AL,BL; CHECKING C5 AND C4
+                JZ C6_1U;
+
+            CHECK_8: ; CHECKING IF COMPUTER SHOULD DO MOVE 8
+                CMP C8_1,1;
+                JZ C1_1U;
+
+                MOV AL,C7;
+                MOV BL,C9;
+
+                CMP AL,BL; CHECKING C7 AND C9
+                JZ C2_1U;
+
+                MOV AL,C2;
+                MOV BL,C5;
+
+                CMP AL,BL; CHECKING C5 AND C2
+                JZ C8_1U;
         C1_1U:
             CMP C1_1, 1;
             JZ C2_1U;
